@@ -5,13 +5,11 @@ msg = 'BWFWKSAKWFIMWDKWFKDWKHZADGKGHZWKGFLKMHHGKWIMWDSESLAWJWWLSALAFVAXXWJWFLWSM
 def decrypt(msg):
     analysed = {} # Créer le dictionnaire des fréquences dans le texte codé
 
-    # Boucler le message pour créer les proportions
+    # Boucler le message pour compter les lettres
     for i in msg:
         if i not in analysed:
             analysed[i] = 0
         analysed[i] += 1
-    for i in analysed:
-        analysed[i] = round(analysed[i] / len(msg) * 100, 2)
     
     e_prop = 17.26 # Proportion réelle du "E" dans la langue française
 
@@ -19,8 +17,8 @@ def decrypt(msg):
     char = ''
     dist = 0
     for i in analysed:
-        if sqrt(e_prop**2+analysed[i]**2)>dist:
-            dist = sqrt(e_prop**2+analysed[i]**2)
+        if e_prop**2+analysed[i]**2>dist:
+            dist = e_prop**2+analysed[i]**2
             char = i
     
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" # Alphabet français
